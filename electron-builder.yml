@@ -32,7 +32,6 @@ dmg:
   icon: build/dmg/icon.icns
 
 win:
-  publisherName: Secure Scuttlebutt Consortium
   target:
     - target: nsis
       arch:

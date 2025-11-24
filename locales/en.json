@@ -376,5 +376,10 @@
 	"Again: be very careful with it. Keep it secret, and don't use this key on multiple devices, including this one.": "Again: be very careful with it. Keep it secret, and don't use this key on multiple devices, including this one.",
 	"Click": "Click",
 	"here": "here",
-	"to export your secret as a mnemonic.": "to export your secret as a mnemonic."
+	"to export your secret as a mnemonic.": "to export your secret as a mnemonic.",
+	"Poncho Wonky": "Poncho Wonky",
+	"de-DE": "de-DE",
+	"fr-FR": "fr-FR",
+	"it-IT": "it-IT",
+	"Extra Statuses": "Extra Statuses"
 }
