@@ -71,6 +71,7 @@ module.exports = {
   },
 
   appImage: {
+    artifactName: '${name}-${version}-linux-${arch}.${ext}',
   },
 
   // Mac-specific configurations -----------------------------------------------

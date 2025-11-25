@@ -1,3 +1,26 @@
+# Poncho Wonky
+
+Poncho Wonky is a new release of Patchwork. While v3.18.1 was supposed to be the last release but I have a computer and I can't be stopped. 
+
+So, I decided to resume working on Patchwork on my own. I am worse developer than all the other clever hands that touched this code, but I can still get things working, hence here we are.
+
+## Version History for Poncho Wonky:
+
+### v4.0.0
+
+Very first tagged release, this should keep all the bugs from Patchwork v3.18.1 cosy in their new home. The objective of this release is to get Patchwork to build and run with a current Electron, NodeJS, and Electron-Builder release.
+
+It required some changes to the codebase but very minimal ones. Mostly API changes.
+
+Electron became a lot more strict since version 11 regarding executing NodeJS code in its own processes. Due to Patchwork stack relying heavily on that, I had to enable `nodeIntegration` and disable `contextIsolation` in Electron windows or it simply wouldn't run. Reworking Patchwork code to be able to run without those flags is beyond what I'm willing to do atm. Also be aware that all Patchwork versions had `nodeIntegration` set to true, so that flag is not a new thing, it is just not how most Electron-based projects like to work.
+
+Besides that I had to disable ASAR which is Chromium/Electron thingy to package the webapp as a single archive. I couldn't get `electron-builder` to generate a working archive. I double checked ManyVerse and it is also disabling ASAR. 
+
+
+---
+
+Last Patchwork readme below...
+
 # :warning: **Patchwork v3.18.1 was the last release!** :warning:
 
 This release is meant to tide us over so that other clients can take it from here.

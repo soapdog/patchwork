@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 -->
 
+## v4.0.0 - 2025-11-25
+### Added
+### Changed
+- Upgraded Electron to 39
+- Upgraded Electron-Builder to 26
+- Building with NodeJS 24
+### Deprecated
+### Removed
+- Removed `require-styles` and created equivalent routine where appropriate.
+### Fixed
+### Security
+
 ## v3.18.1 - 2021-04-05
 
 **Last proper release of Patchwork!**
