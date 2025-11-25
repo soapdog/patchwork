@@ -71,7 +71,6 @@ module.exports = {
   },
 
   appImage: {
-    icon: path.join(__dirname, 'build', 'icon.png')
   },
 
   // Mac-specific configurations -----------------------------------------------
