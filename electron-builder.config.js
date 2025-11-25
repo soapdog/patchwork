@@ -1,3 +1,4 @@
+// Modified from ManyVerse, adapted to Patchwork
 // SPDX-FileCopyrightText: 2021-2022 The Manyverse Authors
 //
 // SPDX-License-Identifier: CC0-1.0
@@ -67,6 +68,10 @@ module.exports = {
       // Disabled to support Debian 10+:
       // 'libappindicator1',
     ],
+  },
+
+  appImage: {
+    icon: path.join(__dirname, 'build', 'icon.png')
   },
 
   // Mac-specific configurations -----------------------------------------------
