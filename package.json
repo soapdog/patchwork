@@ -11,6 +11,9 @@
     "check-locales": "node scripts/check-locales.js",
     "release-notes": "node scripts/release-notes.js",
     "dist": "electron-builder build --config ./electron-builder.config.js --publish=never",
+    "dist:win": "electron-builder build -w --config ./electron-builder.config.js --publish=never",
+    "dist:linux": "electron-builder build -l --config ./electron-builder.config.js --publish=never",
+    "dist:macos": "electron-builder build -m --config ./electron-builder.config.js --publish=never",
     "version": "mv docs/CHANGELOG.md . && changelog-version && mv CHANGELOG.md docs/ && git add docs/CHANGELOG.md"
   },
   "author": "Secure Scuttlebutt Consortium",

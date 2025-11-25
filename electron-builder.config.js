@@ -94,7 +94,6 @@ module.exports = {
     artifactName: '${name}-${version}-windows-${arch}-nsis-installer.${ext}',
     oneClick: false,
     perMachine: false,
-    include: path.join(__dirname, 'scripts', 'installer.nsh'),
   },
 
 

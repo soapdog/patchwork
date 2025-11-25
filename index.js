@@ -4,7 +4,7 @@ process.on("uncaughtException", function (err) {
   process.exit();
 });
 
-// process.noAsar = true
+process.noAsar = true
 
 const electron = require("electron");
 const openWindow = require("./lib/window.js");
