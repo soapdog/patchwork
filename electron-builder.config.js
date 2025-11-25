@@ -47,6 +47,7 @@ module.exports = {
     target: [
       {target: 'deb', arch: ['x64', 'arm64']},
       {target: 'tar.gz', arch: ['x64', 'arm64']},
+      {target: 'AppImage', arch: ['x64', 'arm64']},
     ],
     category: 'Network',
     maintainer: "André Alves Garzia <andre@andregarzia.com>",
