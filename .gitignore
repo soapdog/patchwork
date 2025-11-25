@@ -4,3 +4,5 @@ dist
 # Mac OS metadata file
 .DS_Store
 
+.vscode
+.idea

@@ -4,6 +4,8 @@ process.on("uncaughtException", function (err) {
   process.exit();
 });
 
+// process.noAsar = true
+
 const electron = require("electron");
 const openWindow = require("./lib/window.js");
 
@@ -240,7 +242,6 @@ function openMainWindow() {
         defaultWidth: 1024,
         defaultHeight: 768,
       });
-      console.log("About to open Window");
       windows.main = openWindow(
         ssbConfig,
         Path.join(__dirname, "lib", "main-window.js"),
@@ -346,7 +347,7 @@ function setupContext(appName, opts, cb) {
         center: true,
         fullscreen: false,
         fullscreenable: false,
-        height: 800,
+        height: 150,
         maximizable: false,
         minimizable: false,
         resizable: true,
@@ -358,7 +359,7 @@ function setupContext(appName, opts, cb) {
         skipTaskbar: true,
         title: "patchwork-server",
         useContentSize: true,
-        width: 600,
+        width: 150,
       },
     );
     // windows.background.on('close', (ev) => {

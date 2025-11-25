@@ -21,21 +21,16 @@ jobs:
           sudo apt-get install -y \
           libopenjp2-tools \
           automake \
-          libgconf-2-4 \
           libtool \
           libxext-dev \
           libxkbfile-dev \
           libxtst-dev \
           build-essential
 
-      - name: Install Snapcraft
-        if: runner.os == 'linux'
-        uses: samuelmeuli/action-snapcraft@v1
-
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 24
 
       - name: Check out Git repository
         uses: actions/checkout@v2
