@@ -41,11 +41,12 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: npm install
+     - name: npm install
         run: |
           npm install
 
-      - name: Build Electron app
+      - name: Build/Notarize/Release Electron app
+        if: startsWith(matrix.os, 'macos')
         env:
           github_token: ${{ secrets.github_token }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
@@ -53,5 +54,19 @@ jobs:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           CSC_LINK: ${{ secrets.CSC_LINK }}
           CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}        
+        run: |
+          npm run dist
+
+      - name: Build/Release Electron app
+        if: startsWith(matrix.os, 'ubuntu')
+        env:
+          github_token: ${{ secrets.github_token }}       
+        run: |
+          npm run dist
+
+      - name: Build/Release Electron app
+        if: startsWith(matrix.os, 'windows')
+        env:
+          github_token: ${{ secrets.github_token }}       
         run: |
           npm run dist
