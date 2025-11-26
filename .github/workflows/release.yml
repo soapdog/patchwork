@@ -35,6 +35,10 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v6
 
+      - name: npm install
+        run: |
+          npm install
+
       - name: Build/Notarize/Release Electron app
         env:
           github_token: ${{ secrets.github_token }}
