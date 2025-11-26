@@ -14,6 +14,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 -->
 
+## v4.0.1 - 2025-11-26
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+- Adding notarization and signing support to macOS
+### Security
+
+
+
 ## v4.0.0 - 2025-11-25
 ### Added
 ### Changed

@@ -6,3 +6,11 @@ dist
 
 .vscode
 .idea
+
+# macOS signing stuff
+certificate.p12
+certificates.p12
+sign_app.sh
+package-mac-signed.sh
+*.sh
+*.p12

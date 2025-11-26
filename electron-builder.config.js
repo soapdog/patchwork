@@ -21,13 +21,20 @@ module.exports = {
   extraMetadata: {
     name: NAME_COMPUTER,
     version: packageJSON.version,
-    description: 'A social network off the rest of us',
+    description: 'A social network for the rest of us',
     author: AUTHOR,
     homepage: 'https://scuttlebutt.nz',
     license: 'AGPL-3.0',
     repository: 'https://github.com/soapdog/patchwork/',
   },
   protocols: [{name: 'ssb', schemes: ['ssb']}],
+
+  // Files section
+  files: [
+    '!*.p12',
+    '!*.sh',
+    '!*.lua'
+  ],
 
   // Electron-builder options --------------------------------------------------
   asar: false,
@@ -80,8 +87,12 @@ module.exports = {
     icon: path.join(__dirname, 'build', 'icon.png'),
     category: 'public.app-category.social-networking',
     darkModeSupport: true,
-    target: [{target: 'dmg'}],
-    identity: null,
+    target: [{target: 'dmg', arch: 'universal'}],
+    hardenedRuntime: true,
+    type: 'distribution',
+    entitlements: "build/entitlements.mac.plist",
+    entitlementsInherit: "build/entitlements.mac.plist",
+    x64ArchFiles: '**/*.node'
   },
 
   dmg: {
