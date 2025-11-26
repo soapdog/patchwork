@@ -41,7 +41,7 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-     - name: npm install
+      - name: npm install
         run: |
           npm install
 
