@@ -1,0 +1,42 @@
+BlogPostEditor {
+  display: flex
+  flex-direction: column
+  div.ThumbnailAndSummary {
+    display: flex
+    flex-direction: row
+    div.banner {
+      margin-top: 10px
+      border: 1px solid #aaa
+      box-shadow: none
+      height: 150px
+      flex: 1 1 auto
+      background-position: center
+      background-repeat: no-repeat
+      background-size: cover
+    }
+    textarea.summary {
+      padding: 10px
+      resize: vertical
+      margin-top: 10px
+      border: 1px solid #ccc
+      font-size: 120%
+      flex: 1 1 auto
+      height: 150px
+    }
+  }
+  input {
+    border: 1px solid #ccc
+    font-size: 150%
+    padding: 10px
+  }
+  textarea.content {
+    resize: vertical
+    margin-top: 10px
+    border: 1px solid #ccc
+    padding: 10px
+    font-size: 120%
+    flex: 1
+    min-height: 300px
+  }
+  
+}
