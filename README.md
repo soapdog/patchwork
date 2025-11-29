@@ -6,6 +6,14 @@ So, I decided to resume working on Patchwork on my own. I am worse developer tha
 
 ## Version History for Poncho Wonky:
 
+### v4.1.0
+
+Added support for posting blog messages and a new page to view blog posts.
+
+### v4.0.1
+
+Added macOS signing and notarisation. Took forever.
+
 ### v4.0.0
 
 Very first tagged release, this should keep all the bugs from Patchwork v3.18.1 cosy in their new home. The objective of this release is to get Patchwork to build and run with a current Electron, NodeJS, and Electron-Builder release.

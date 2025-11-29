@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 -->
 
+## v4.1.0 - 2025-11-29
+### Added
+- New "Blog Posts" page under the "more" menu.
+- Users can now post messages of type blog.
+### Changed
+- Added a menu item to link to the repository.
+- Added a menu item to link to the issue tracker.
+### Deprecated
+### Removed
+### Fixed
+### Security
+
 ## v4.0.1 - 2025-11-26
 ### Added
 ### Changed

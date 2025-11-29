@@ -141,6 +141,18 @@ electron.app.on("ready", () => {
           require("electron").shell.openExternal("https://scuttlebutt.nz");
         },
       },
+      {
+        label: "Source Code on Github",
+        click() {
+          require("electron").shell.openExternal("https://github.com/soapdog/patchwork/");
+        },
+      },
+      {
+        label: "Report issue",
+        click() {
+          require("electron").shell.openExternal("https://github.com/soapdog/patchwork/issues/new/choose");
+        },
+      },
     ];
     if (process.platform === "darwin") {
       const win = menu.find((x) => x.label === "Window");
