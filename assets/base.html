@@ -30,9 +30,8 @@
       // redirect errors to stderr
       window.addEventListener('error', function (e) {
         e.preventDefault()
-        console.dir(e)
-        console.error(e.error?.stack || 'Uncaught ' + e.error)
-        console.log(JSON.stringify(e))
+        // console.dir(e)
+        console.error(e.error?.stack || 'Uncaught in base ' + JSON.stringify(e.error))
       })
 
       electron.ipcRenderer.once('window-setup', (event, msg) => {
