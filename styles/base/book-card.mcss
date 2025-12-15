@@ -4,7 +4,7 @@ BookCard {
   flex-direction: column
   div.content {
     display: flex
-    flex-direction: row
+    flex-direction: column
     flex-grow: 1
     cursor: pointer
     div.Thumbnail {
@@ -36,10 +36,10 @@ BookCard {
     }
   }
 }
-Thumbnail {
-  min-width: 20rem
-  width: 20rem
-  min-height: 10rem
+BookCover {
+  max-width: 250px
+  width: 250px
+  height: 300px
   /* height: 10rem */
   -empty {
     color: #fff

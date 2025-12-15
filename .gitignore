@@ -14,3 +14,5 @@ sign_app.sh
 package-mac-signed.sh
 *.sh
 *.p12
+
+*-old*
