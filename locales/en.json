@@ -390,5 +390,15 @@
 	"Type a summary": "Type a summary",
 	"Type your post": "Type your post",
 	"Books": "Books",
-	"Add New Book": "Add New Book"
+	"Add New Book": "Add New Book",
+	"Type the book description": "Type the book description",
+	"Edit Book": "Edit Book",
+	"Book title": "Book title",
+	"Book authors (comma separated)": "Book authors (comma separated)",
+	"Book description": "Book description",
+	"Choose Cover Image...": "Choose Cover Image...",
+	"Book Series Name": "Book Series Name",
+	"Book Series Number": "Book Series Number",
+	"Book Title": "Book Title",
+	"Book Authors (comma separated)": "Book Authors (comma separated)"
 }

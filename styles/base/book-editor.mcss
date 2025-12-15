@@ -1,0 +1,43 @@
+BookEditor {
+  display: flex
+  flex-direction: column
+  div.CoverAndDescription {
+    display: flex
+    flex-direction: row
+    div.banner {
+      margin-top: 10px
+      border: 1px solid #aaa
+      box-shadow: none
+      height: 250px
+      flex: 1 1 auto
+      background-position: center
+      background-repeat: no-repeat
+      background-size: cover
+    }
+    textarea.description {
+      padding: 10px
+      resize: vertical
+      margin-top: 10px
+      border: 1px solid #ccc
+      font-size: 120%
+      flex: 1 1 auto
+      height: 250px
+      min-width: 300px
+    }
+  }
+  input {
+    border: 1px solid #ccc
+    font-size: 150%
+    padding: 10px
+  }
+  textarea.content {
+    resize: vertical
+    margin-top: 10px
+    border: 1px solid #ccc
+    padding: 10px
+    font-size: 120%
+    flex: 1
+    min-height: 300px
+  }
+  
+}
