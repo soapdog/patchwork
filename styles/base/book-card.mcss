@@ -4,13 +4,14 @@ BookCard {
   flex-direction: column
   div.content {
     display: flex
-    flex-direction: column
     flex-grow: 1
     cursor: pointer
     div.Thumbnail {
+      flex: 1 1 auto
       margin-right: 1rem
     }
     div.text {
+      flex: 1 1 auto
       padding: .5rem
       h1 {
         line-height: 1.2
