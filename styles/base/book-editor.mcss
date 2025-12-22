@@ -1,6 +1,19 @@
 BookEditor {
   display: flex
   flex-direction: column
+  div.controls {
+    display: flex
+    flex-direction: row
+    padding-bottom: 10px
+
+    input.isbn {
+      flex-basis: 70%
+    }
+
+    button {
+      flex-basis: 30%
+    }
+  }
   div.CoverAndDescription {
     display: flex
     flex-direction: row
@@ -12,7 +25,7 @@ BookEditor {
       flex: 1 1 auto
       background-position: center
       background-repeat: no-repeat
-      background-size: cover
+      background-size: contain
     }
     textarea.description {
       padding: 10px
