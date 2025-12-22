@@ -33,6 +33,9 @@ BookDetails {
         margin-top: 1rem
         text-decoration: underline
       }
+      button.editor {
+        margin-top: 20px
+      }
     }
   }
 }
