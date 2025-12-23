@@ -29,6 +29,15 @@ BookDetails {
           flex: 1 1 auto
         }
       }
+       div.actions {
+        display: flex
+        flex-direction: row
+        flex-grow: 1
+        gap: 10px
+        button {
+          flex: 1 1 auto
+        }
+      }
       div.read {
         margin-top: 1rem
         text-decoration: underline

@@ -1,0 +1,23 @@
+BookReviewEditor {
+  display: flex
+  flex-direction: column
+  
+    textarea.review {
+      padding: 10px
+      resize: vertical
+      margin-top: 10px
+      border: 1px solid #ccc
+      font-size: 120%
+      flex: 1 1 auto
+      height: 250px
+      min-width: 300px
+    }
+  }
+  input {
+    border: 1px solid #ccc
+    font-size: 150%
+    padding: 10px
+  }
+  
+  
+}
