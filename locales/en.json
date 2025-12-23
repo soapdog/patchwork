@@ -408,5 +408,7 @@
 	"Type in your review": "Type in your review",
 	"Rating type (Ex :star:) (you can use emojis)": "Rating type (Ex :star:) (you can use emojis)",
 	"Shelves (comma separated value)": "Shelves (comma separated value)",
-	"Max rating (ex: 5)": "Max rating (ex: 5)"
+	"Max rating (ex: 5)": "Max rating (ex: 5)",
+	"Refresh List": "Refresh List",
+	"An error occurred while attempting to add this book.": "An error occurred while attempting to add this book."
 }
