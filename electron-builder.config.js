@@ -87,7 +87,7 @@ module.exports = {
     icon: path.join(__dirname, 'build', 'icon.png'),
     category: 'public.app-category.social-networking',
     darkModeSupport: true,
-    target: [{target: 'dmg', arch: 'universal'}],
+    target: [{target: 'dmg', arch: 'x64'},{target: 'dmg', arch: 'arm64'}],
     hardenedRuntime: true,
     type: 'distribution',
     entitlements: "build/entitlements.mac.plist",
