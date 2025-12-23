@@ -14,6 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 -->
 
+## [Unreleased]
+### Added
+* Bookclub support. Added bookclub features.
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
 ## v4.1.0 - 2025-11-29
 ### Added
 - New "Blog Posts" page under the "more" menu.
