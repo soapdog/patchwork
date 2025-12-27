@@ -15,6 +15,7 @@ const WindowState = require("electron-window-state");
 const Menu = electron.Menu;
 const extend = require("xtend");
 const ssbKeys = require("ssb-keys");
+const announcements = require("./lib/announcements.js")
 
 const windows = {
   dialogs: new Set(),
@@ -178,6 +179,14 @@ electron.app.on("ready", () => {
     quitting = true;
   });
 
+  electron.ipcMain.handle("get-announcements", () => {
+    return announcements.getAsHTML()
+  })
+
+  electron.ipcMain.handle("clear-announcements", () => {
+    return announcements.markAsRead()
+  })
+
   electron.ipcMain.handle("navigation-menu-popup", (event, data) => {
     const { items, x, y } = data;
     const window = event.sender;
@@ -204,6 +213,12 @@ electron.app.on("ready", () => {
     electron.app.badgeCount = count;
   });
   electron.ipcMain.on("exit", (ev, code) => process.exit(code));
+
+  // announcements
+  announcements.copy()
+  if (announcements.available()) {
+    windows.announcement = openAnnouncementsWindow()
+  }
 });
 
 function openServerDevTools() {
@@ -379,4 +394,31 @@ function setupContext(appName, opts, cb) {
     //   windows.background.hide()
     // })
   }
+}
+
+function openAnnouncementsWindow() {
+  windows.announcements = openWindow(
+        ssbConfig,
+        Path.join(__dirname, "lib", "announcements-window.js"),
+        {
+          minWidth: 400,
+          center: true,
+          width: 400,
+          height: 600,
+          // titleBarStyle: "hiddenInset",
+          autoHideMenuBar: true,
+          title: "Poncho Wonky Announcements",
+          webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+          },
+          announcements: announcements.getAsHTML(),
+          show: true,
+          backgroundColor: "#EEE",
+          icon: Path.join(__dirname, "assets/icon.png"),
+        },
+      );
+
+  windows.announcements.setAlwaysOnTop(true)
+  // windows.announcements.openDevTools()
 }

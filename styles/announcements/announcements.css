@@ -1,0 +1,49 @@
+body {
+	margin: 0px;
+	display: flex;
+	flex-direction: column;
+		background-color: whitesmoke;
+
+}
+
+header {
+	background-color: lightgreen;
+	border-bottom: solid 1px darkgreen;
+	padding-bottom: 5px;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+    height: 40px;
+}
+
+header > h1 {
+	color: darkgreen;
+	font-size: 1.5em;
+}
+
+main {
+	background-color: whitesmoke;
+	display: flex;
+	min-height: 500px;
+	padding: 8px;
+	flex: 1 1 auto;
+	scroll: auto;
+	padding-bottom: 100px;
+}
+
+footer {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	background-color: lightcyan;
+	border-top: solid 1px cyan;
+	display: flex;
+	gap: 10px;
+	height: 30px;
+	padding-top: 10px;
+	padding-right: 10px;
+}
+
+footer > div.spacer {
+	flex: 1 1 auto;
+}
