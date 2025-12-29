@@ -1,0 +1,26 @@
+IndexingReport {
+	display: flex
+	flex-direction: column
+	max-width: 500px
+	width: 500px
+
+	div.ReportItem {
+		display: flex
+		flex-direction: row
+	    justify-content: center
+	    align-items: center
+
+		span.info {
+			flex: 1 1 auto
+			text-align: right
+			font-size: 1.1em
+			max-width: 200px
+		}
+
+		meter {
+			flex: 1 1 auto
+			max-width: 300px
+			width: 300px
+		}
+	}
+}

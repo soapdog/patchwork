@@ -413,5 +413,6 @@
 	"An error occurred while attempting to add this book.": "An error occurred while attempting to add this book.",
 	"Rebuild indexes": "Rebuild indexes",
 	"to rebuild your indexes. Might take a while.": "to rebuild your indexes. Might take a while.",
-	"to rebuild your indexes. Might take several minutes.": "to rebuild your indexes. Might take several minutes."
+	"to rebuild your indexes. Might take several minutes.": "to rebuild your indexes. Might take several minutes.",
+	"Indexing Report": "Indexing Report"
 }
