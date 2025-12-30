@@ -50,7 +50,7 @@ module.exports = {
 
   // Linux-specific configurations ---------------------------------------------
   linux: {
-    icon: path.join(__dirname, 'build', 'icon.png'),
+    icon: path.join(__dirname, 'build', '512x512.png'),
     target: [
       {target: 'deb', arch: ['x64', 'arm64']},
       {target: 'tar.gz', arch: ['x64', 'arm64']},
@@ -84,7 +84,7 @@ module.exports = {
 
   // Mac-specific configurations -----------------------------------------------
   mac: {
-    icon: path.join(__dirname, 'build', 'icon.png'),
+    icon: path.join(__dirname, 'build', '512x512.png'),
     category: 'public.app-category.social-networking',
     darkModeSupport: true,
     target: [{target: 'dmg', arch: 'x64'},{target: 'dmg', arch: 'arm64'}],
@@ -96,7 +96,7 @@ module.exports = {
   },
 
   dmg: {
-    icon: path.join(__dirname, 'build', 'icon.png'),
+    icon: path.join(__dirname, 'build', '512x512.png'),
     // background: path.join(__dirname, 'build', 'dmg-background.png'),
   },
 

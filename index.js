@@ -1,12 +1,13 @@
 process.on("uncaughtException", function (err) {
-  console.log("uncaughtException, quitting")
+  console.log("uncaughtException, quitting");
   console.log(err);
   process.exit();
 });
 
-process.noAsar = true
+process.noAsar = true;
 
 const electron = require("electron");
+const { nativeImage } = require("electron");
 const openWindow = require("./lib/window.js");
 
 const Path = require("path");
@@ -15,11 +16,14 @@ const WindowState = require("electron-window-state");
 const Menu = electron.Menu;
 const extend = require("xtend");
 const ssbKeys = require("ssb-keys");
-const announcements = require("./lib/announcements.js")
+const announcements = require("./lib/announcements.js");
 
 const windows = {
   dialogs: new Set(),
 };
+  const appIcon = nativeImage.createFromPath(
+    Path.join(__dirname, "assets/512x512.png"),
+  );
 let ssbConfig = null;
 let quitting = false;
 
@@ -145,13 +149,17 @@ electron.app.on("ready", () => {
       {
         label: "Source Code on Github",
         click() {
-          require("electron").shell.openExternal("https://github.com/soapdog/patchwork/");
+          require("electron").shell.openExternal(
+            "https://github.com/soapdog/patchwork/",
+          );
         },
       },
       {
         label: "Report issue",
         click() {
-          require("electron").shell.openExternal("https://github.com/soapdog/patchwork/issues/new/choose");
+          require("electron").shell.openExternal(
+            "https://github.com/soapdog/patchwork/issues/new/choose",
+          );
         },
       },
     ];
@@ -180,12 +188,12 @@ electron.app.on("ready", () => {
   });
 
   electron.ipcMain.handle("get-announcements", () => {
-    return announcements.getAsHTML()
-  })
+    return announcements.getAsHTML();
+  });
 
   electron.ipcMain.handle("clear-announcements", () => {
-    return announcements.markAsRead()
-  })
+    return announcements.markAsRead();
+  });
 
   electron.ipcMain.handle("navigation-menu-popup", (event, data) => {
     const { items, x, y } = data;
@@ -215,9 +223,9 @@ electron.app.on("ready", () => {
   electron.ipcMain.on("exit", (ev, code) => process.exit(code));
 
   // announcements
-  announcements.copy()
+  announcements.copy();
   if (announcements.available()) {
-    windows.announcement = openAnnouncementsWindow()
+    windows.announcement = openAnnouncementsWindow();
   }
 });
 
@@ -264,49 +272,50 @@ function navigateTo(target) {
 }
 
 function openMainWindow() {
-    if (!windows.main) {
-      const windowState = WindowState({
-        defaultWidth: 1024,
-        defaultHeight: 768,
-      });
-      windows.main = openWindow(
-        ssbConfig,
-        Path.join(__dirname, "lib", "main-window.js"),
-        {
-          minWidth: 800,
-          x: windowState.x,
-          y: windowState.y,
-          width: windowState.width,
-          height: windowState.height,
-          titleBarStyle: "hiddenInset",
-          autoHideMenuBar: true,
-          title: "Poncho Wonky",
-          webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-          },
-          show: true,
-          backgroundColor: "#EEE",
-          icon: Path.join(__dirname, "assets/icon.png"),
+  if (!windows.main) {
+    const windowState = WindowState({
+      defaultWidth: 1024,
+      defaultHeight: 768,
+    });
+    windows.main = openWindow(
+      ssbConfig,
+      Path.join(__dirname, "lib", "main-window.js"),
+      {
+        minWidth: 800,
+        x: windowState.x,
+        y: windowState.y,
+        width: windowState.width,
+        height: windowState.height,
+        titleBarStyle: "hiddenInset",
+        autoHideMenuBar: true,
+        title: "Poncho Wonky",
+        webPreferences: {
+          nodeIntegration: true,
+          contextIsolation: false,
         },
-        openServerDevTools,
-        navigateTo,
-      );
+        show: true,
+        backgroundColor: "#EEE",
+        icon: appIcon,
+      },
+      openServerDevTools,
+      navigateTo,
+    );
 
-      windowState.manage(windows.main);
-      windows.main.setSheetOffset(40);
-      windows.main.on("close", function (e) {
-        if (!quitting && process.platform === "darwin") {
-          e.preventDefault();
-          windows.main.hide();
-        }
-      });
-      windows.main.on("closed", function () {
-        windows.main = null;
-        if (process.platform !== "darwin") electron.app.quit();
-      });
-    }
-    return windows.main;
+    windowState.manage(windows.main);
+    windows.main.setSheetOffset(40);
+    windows.main.on("close", function (e) {
+      if (!quitting && process.platform === "darwin") {
+        e.preventDefault();
+        windows.main.hide();
+      }
+    });
+    windows.main.on("closed", function () {
+      windows.main = null;
+      if (process.platform !== "darwin") electron.app.quit();
+    });
+  }
+  windows.main.setIcon(appIcon)
+  return windows.main;
 }
 
 function setupContext(appName, opts, cb) {
@@ -393,32 +402,34 @@ function setupContext(appName, opts, cb) {
     //   ev.preventDefault()
     //   windows.background.hide()
     // })
+    windows.background.setIcon(appIcon)
   }
 }
 
 function openAnnouncementsWindow() {
   windows.announcements = openWindow(
-        ssbConfig,
-        Path.join(__dirname, "lib", "announcements-window.js"),
-        {
-          minWidth: 400,
-          center: true,
-          width: 400,
-          height: 600,
-          // titleBarStyle: "hiddenInset",
-          autoHideMenuBar: true,
-          title: "Poncho Wonky Announcements",
-          webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-          },
-          announcements: announcements.getAsHTML(),
-          show: true,
-          backgroundColor: "#EEE",
-          icon: Path.join(__dirname, "assets/icon.png"),
-        },
-      );
+    ssbConfig,
+    Path.join(__dirname, "lib", "announcements-window.js"),
+    {
+      minWidth: 400,
+      center: true,
+      width: 400,
+      height: 600,
+      // titleBarStyle: "hiddenInset",
+      autoHideMenuBar: true,
+      title: "Poncho Wonky Announcements",
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false,
+      },
+      announcements: announcements.getAsHTML(),
+      show: true,
+      backgroundColor: "#EEE",
+      icon: appIcon
+    },
+  );
 
-  windows.announcements.setAlwaysOnTop(true)
+  windows.announcements.setAlwaysOnTop(true);
+  windows.announcements.setIcon(appIcon)
   // windows.announcements.openDevTools()
 }
