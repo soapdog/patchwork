@@ -18,12 +18,14 @@ const extend = require("xtend");
 const ssbKeys = require("ssb-keys");
 const announcements = require("./lib/announcements.js");
 
+require("@electron/remote/main").initialize();
+
 const windows = {
   dialogs: new Set(),
 };
-  const appIcon = nativeImage.createFromPath(
-    Path.join(__dirname, "assets/512x512.png"),
-  );
+const appIcon = nativeImage.createFromPath(
+  Path.join(__dirname, "assets/512x512.png"),
+);
 let ssbConfig = null;
 let quitting = false;
 
@@ -67,6 +69,7 @@ electron.app.on("ready", () => {
       process.argv.includes("--use-global-ssb")),
   }, () => {
     const browserWindow = openMainWindow();
+    require("@electron/remote/main").enable(browserWindow.webContents)
 
     browserWindow.on("app-command", (e, cmd) => {
       switch (cmd) {
@@ -314,7 +317,7 @@ function openMainWindow() {
       if (process.platform !== "darwin") electron.app.quit();
     });
   }
-  windows.main.setIcon(appIcon)
+  windows.main.setIcon(appIcon);
   return windows.main;
 }
 
@@ -402,7 +405,7 @@ function setupContext(appName, opts, cb) {
     //   ev.preventDefault()
     //   windows.background.hide()
     // })
-    windows.background.setIcon(appIcon)
+    windows.background.setIcon(appIcon);
   }
 }
 
@@ -425,11 +428,11 @@ function openAnnouncementsWindow() {
       announcements: announcements.getAsHTML(),
       show: true,
       backgroundColor: "#EEE",
-      icon: appIcon
+      icon: appIcon,
     },
   );
 
   windows.announcements.setAlwaysOnTop(true);
-  windows.announcements.setIcon(appIcon)
+  windows.announcements.setIcon(appIcon);
   // windows.announcements.openDevTools()
 }

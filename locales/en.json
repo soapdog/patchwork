@@ -414,5 +414,9 @@
 	"Rebuild indexes": "Rebuild indexes",
 	"to rebuild your indexes. Might take a while.": "to rebuild your indexes. Might take a while.",
 	"to rebuild your indexes. Might take several minutes.": "to rebuild your indexes. Might take several minutes.",
-	"Indexing Report": "Indexing Report"
+	"Indexing Report": "Indexing Report",
+	"Neutral": "Neutral",
+	"Listen": "Listen",
+	"Ignore": "Ignore",
+	"Update Gathering": "Update Gathering"
 }

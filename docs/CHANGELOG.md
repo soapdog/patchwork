@@ -14,6 +14,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 -->
 
+## v4.3.2 - 2026-01-02
+### Added
+### Changed
+* added `@electron/remote` module as a replacement for `electron.remote` which has been deprecated.
+### Deprecated
+### Removed
+### Fixed
+* loads of `showDialog()` calls used `electron.remote` and now use the remote from `@electron/remote` module.
+### Security
+
 ## v4.3.1 - 2026-01-02
 ### Added
 * announcement system allows me to display notices on launch
