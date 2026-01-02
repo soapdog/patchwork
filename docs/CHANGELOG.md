@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 -->
 
+## v4.3.1 - 2026-01-02
+### Added
+* announcement system allows me to display notices on launch
+### Changed
+* clicking the `x` on an update notice ignores the update on future launches.
+### Deprecated
+### Removed
+### Fixed
+* ssb-db overflow bug fixed. Might require reindexing
+* missing icon on linux
+### Security
+
 ## v4.2.1 - 2025-12-24
 ### Added
 ### Changed
