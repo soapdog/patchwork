@@ -3,7 +3,12 @@ local view = {
 }
 
 function view.query()
-
+	local res = {
+		query = {
+			type = "post"
+		}
+	}
+	return res
 end
 
 function view.filter(msg)
