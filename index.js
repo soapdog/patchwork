@@ -218,8 +218,8 @@ electron.app.on("ready", () => {
       enabled ? langs : [],
     );
   });
-  electron.ipcMain.handle("consoleLog", (ev, o) => console.log(o));
-  electron.ipcMain.handle("consoleError", (ev, o) => console.error(o));
+  electron.ipcMain.handle("consoleLog", (ev, ...o) => console.log(...o));
+  electron.ipcMain.handle("consoleError", (ev, ...o) => console.error(...o));
   electron.ipcMain.handle("badgeCount", (ev, count) => {
     electron.app.badgeCount = count;
   });
