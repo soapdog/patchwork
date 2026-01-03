@@ -1,0 +1,18 @@
+TroubleshootingTools {
+	display: flex
+	flex-direction: row
+	gap: 20px
+
+	div.col {
+		flex: 1 1 auto
+
+		section {
+			display: flex
+			flex-direction: column
+
+			span {
+				margin-bottom: 10px
+			}
+		}
+	}
+}

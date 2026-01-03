@@ -225,6 +225,11 @@ electron.app.on("ready", () => {
   });
   electron.ipcMain.on("exit", (ev, code) => process.exit(code));
 
+  electron.ipcMain.on("relaunch-app", (ev) => {
+    electron.app.relaunch()
+    electron.app.quit()
+  })
+
   // announcements
   announcements.copy();
   if (announcements.available()) {
