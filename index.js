@@ -230,6 +230,15 @@ electron.app.on("ready", () => {
     electron.app.quit()
   })
 
+  electron.ipcMain.on("open-in-audio-player", (ev, msg) => {
+    console.log("open-in-audio-player")
+    if (!windows?.audioPlayer) {
+      openAudioPlayer(msg); 
+    } else {
+      windows.audioPlayer.webContents.send("queue-audio", msg)
+    }
+  })
+
   // announcements
   announcements.copy();
   if (announcements.available()) {
@@ -440,4 +449,35 @@ function openAnnouncementsWindow() {
   windows.announcements.setAlwaysOnTop(true);
   windows.announcements.setIcon(appIcon);
   // windows.announcements.openDevTools()
+}
+
+function openAudioPlayer(msg) {
+  windows.audioPlayer = openWindow(
+    ssbConfig,
+    Path.join(__dirname, "lib", "audio-player-window.js"),
+    {
+      minWidth: 100,
+      center: true,
+      width: 250,
+      height: 300,
+      // titleBarStyle: "hiddenInset",
+      autoHideMenuBar: true,
+      title: "Poncho Wonky Audio Player",
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false,
+      },
+      data: msg,
+      show: true,
+      backgroundColor: "#EEE",
+      icon: appIcon,
+    },
+  );
+
+  windows.audioPlayer.setAlwaysOnTop(true);
+  windows.audioPlayer.setIcon(appIcon);
+  // windows.audioPlayer.openDevTools()
+  windows.audioPlayer.webContents.on("close", () => {
+    delete windows.audioPlayer
+  })
 }

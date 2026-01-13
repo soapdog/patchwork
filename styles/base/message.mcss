@@ -181,6 +181,11 @@ Message {
           background: #7f2fff
         }
       }
+      a.audio {
+        :before {
+          content: '🎵 '
+        }
+      }
       a.reply {
         :before {
           content: "↩ "

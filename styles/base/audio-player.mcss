@@ -1,0 +1,14 @@
+AudioPlayer {
+	div.middle {
+		audio#player {
+			width: 100%
+		}
+		ul.queue {
+			list-style-type: none
+			padding-inline-start: 0px
+			li {
+				padding: 10px
+			}
+		}
+	}
+}
