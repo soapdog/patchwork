@@ -16,3 +16,5 @@ package-mac-signed.sh
 *.p12
 
 *-old*
+
+*.sublime*
