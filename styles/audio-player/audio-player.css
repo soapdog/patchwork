@@ -1,0 +1,4 @@
+li:nth-child(odd) {
+  background-color: darkgray;
+  color: whitesmoke;
+}
