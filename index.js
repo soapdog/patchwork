@@ -69,7 +69,7 @@ electron.app.on("ready", () => {
       process.argv.includes("--use-global-ssb")),
   }, () => {
     const browserWindow = openMainWindow();
-    require("@electron/remote/main").enable(browserWindow.webContents)
+    require("@electron/remote/main").enable(browserWindow.webContents);
 
     browserWindow.on("app-command", (e, cmd) => {
       switch (cmd) {
@@ -226,18 +226,18 @@ electron.app.on("ready", () => {
   electron.ipcMain.on("exit", (ev, code) => process.exit(code));
 
   electron.ipcMain.on("relaunch-app", (ev) => {
-    electron.app.relaunch()
-    electron.app.quit()
-  })
+    electron.app.relaunch();
+    electron.app.quit();
+  });
 
   electron.ipcMain.on("open-in-audio-player", (ev, msg) => {
-    console.log("open-in-audio-player")
+    console.log("open-in-audio-player");
     if (!windows?.audioPlayer) {
-      openAudioPlayer(msg); 
+      openAudioPlayer(msg);
     } else {
-      windows.audioPlayer.webContents.send("queue-audio", msg)
+      windows.audioPlayer.webContents.send("queue-audio", msg);
     }
-  })
+  });
 
   // announcements
   announcements.copy();
@@ -452,6 +452,9 @@ function openAnnouncementsWindow() {
 }
 
 function openAudioPlayer(msg) {
+  let display = electron.screen.getPrimaryDisplay();
+  let width = display.bounds.width;
+  let height = display.bounds.height;
   windows.audioPlayer = openWindow(
     ssbConfig,
     Path.join(__dirname, "lib", "audio-player-window.js"),
@@ -460,6 +463,8 @@ function openAudioPlayer(msg) {
       center: true,
       width: 250,
       height: 300,
+      x: width - 300,
+      y: height - 350,
       // titleBarStyle: "hiddenInset",
       autoHideMenuBar: true,
       title: "Poncho Wonky Audio Player",
@@ -478,6 +483,6 @@ function openAudioPlayer(msg) {
   windows.audioPlayer.setIcon(appIcon);
   // windows.audioPlayer.openDevTools()
   windows.audioPlayer.webContents.on("close", () => {
-    delete windows.audioPlayer
-  })
+    delete windows.audioPlayer;
+  });
 }
