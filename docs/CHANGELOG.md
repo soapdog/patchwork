@@ -14,6 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 -->
 
+## v4.4.0 - 2026-01-20
+### Added
+* Audio player
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
 ## v4.3.2 - 2026-01-02
 ### Added
 ### Changed
