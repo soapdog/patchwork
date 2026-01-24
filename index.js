@@ -240,6 +240,15 @@ electron.app.on("ready", () => {
     }
   });
 
+  electron.ipcMain.on("open-custom-script-window", (ev, data) => {
+    console.log("open-custom-script-window", data);
+    if (!windows?.customScriptWindow) {
+      openCustomScriptWindow(data);
+    } else {
+      windows.audioPlayer.webContents.send("send-data", data);
+    }
+  });
+
   // announcements
   announcements.copy();
   if (announcements.available()) {
@@ -488,5 +497,40 @@ function openAudioPlayer(msg) {
   // windows.audioPlayer.openDevTools()
   windows.audioPlayer.webContents.on("close", () => {
     delete windows.audioPlayer;
+  });
+}
+
+function openCustomScriptWindow(data) {
+  let display = electron.screen.getPrimaryDisplay();
+  let width = display.bounds.width;
+  let height = display.bounds.height;
+  windows.customScriptWindow = openWindow(
+    ssbConfig,
+    Path.join(__dirname, "lib", "custom-script-window.js"),
+    {
+      minWidth: 100,
+      center: true,
+      width: data?.opts?.width || 250,
+      height: data?.opts?.height || 300,
+      x: width - 300,
+      y: height - 350,
+      // titleBarStyle: "hiddenInset",
+      autoHideMenuBar: true,
+      title: "Poncho Wonky Custom Script",
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false,
+      },
+      data: data,
+      show: true,
+      backgroundColor: "#EEE",
+      icon: appIcon,
+    },
+  );
+
+  windows.customScriptWindow.setIcon(appIcon);
+  // windows.customScriptWindow.openDevTools()
+  windows.customScriptWindow.webContents.on("close", () => {
+    delete windows.customScriptWindow;
   });
 }

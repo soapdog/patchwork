@@ -11,7 +11,8 @@ function string:contains(sub)
 end
 
 function string:startswith(start)
-    return self:sub(1, #start) == start
+    local sub = self:sub(1, #start) == start
+    return sub
 end
 
 function string:endswith(ending)
@@ -21,7 +22,7 @@ end
 local function extractWormBlossomURL(text)
 	local m = string.match(text, '[a-z]*://[^ \n >,;]*')
 
-	if string.startswith(m, "https://worm-blossom/#y") then
+	if m and m:startswith("https://worm-blossom.org/#y") then
 		return m
 	else
 		return false
@@ -37,8 +38,12 @@ The action function is called if the user press the button.
 ]]
 
 function wbMusic.buttonAction(msg)
-	if msg.content.type ~= "post" then
-		return false
+	if msg == nil then 
+		return false, "no message"
+	end
+
+	if msg.value.content.type ~= "post" then
+		return false, "message is not post"
 	end
 
 	local text =  msg.value.content.text
@@ -47,22 +52,27 @@ function wbMusic.buttonAction(msg)
 	if url then
 		return true, "Open in Worm Blossom Player"
 	else
-		return false
+		return false, "no blossom url"
 	end
 end
 
 function wbMusic.action(msg)
 	local text =  msg.value.content.text
 	local url = extractWormBlossomURL(text)
-	local content = fetch(url)
-	if content then 
-		local iframe = querySelect("iframe")
-		local src = getAttribute(iframe, "src")
-		local song = getParam(src, "song")
-		openWindow("music_player.html", {
-			data = song
-		})
-	end
+
+	local co = coroutine.create(function() -- must wrapped in a coroutine because fetch is async
+		local content = fetch(url)
+		if content then
+			local iframe = querySelect(content, "iframe")
+			local src = getAttribute(iframe, "src")
+			local song = getParam(src, "song")
+			log(song)
+			openWindowFromAssets("worm-blossom-player/player.html", {
+				data = song
+			})
+		end
+	end)
+	coroutine.resume(co)
 end
 
 --[[
