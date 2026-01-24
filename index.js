@@ -17,6 +17,7 @@ const Menu = electron.Menu;
 const extend = require("xtend");
 const ssbKeys = require("ssb-keys");
 const announcements = require("./lib/announcements.js");
+const customScripts = require("./lib/depject/scripts/lua/custom-scripts.js");
 
 require("@electron/remote/main").initialize();
 
@@ -244,6 +245,9 @@ electron.app.on("ready", () => {
   if (announcements.available()) {
     windows.announcement = openAnnouncementsWindow();
   }
+
+  // custom scripts
+  customScripts.copySamples();
 });
 
 function openServerDevTools() {

@@ -32,6 +32,7 @@
     "electron-default-menu": "~1.0.1",
     "electron-window-state": "^5.0.3",
     "escape-string-regexp": "^4.0.0",
+    "fengari": "^0.1.5",
     "fix-path": "^3.0.0",
     "flat": "^5.0.0",
     "flatpickr": "4.5.2",

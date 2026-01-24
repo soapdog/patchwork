@@ -186,6 +186,12 @@ Message {
           content: '🎵 '
         }
       }
+      a.lua {
+        :before {
+          content: url(../assets/lua12.png)
+          padding-right: 4px
+        }
+      }
       a.reply {
         :before {
           content: "↩ "
