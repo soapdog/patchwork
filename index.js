@@ -166,6 +166,12 @@ electron.app.on("ready", () => {
           );
         },
       },
+      {
+        label: "Protocol Guide",
+        click() {
+          openProtocolGuideWindow()
+        },
+      },
     ];
     if (process.platform === "darwin") {
       const win = menu.find((x) => x.label === "Window");
@@ -533,4 +539,31 @@ function openCustomScriptWindow(data) {
   windows.customScriptWindow.webContents.on("close", () => {
     delete windows.customScriptWindow;
   });
+}
+
+function openProtocolGuideWindow() {
+  let display = electron.screen.getPrimaryDisplay();
+  let width = display.bounds.width;
+  let height = display.bounds.height;
+  windows.customScriptWindow = new electron.BrowserWindow(extend({
+    show: false,
+    resizable: true,
+    devTools: true,
+    width: 1000,
+    center: true,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: false, // XXX: Maybe not always necessary (?),
+      contextIsolation: false,
+    },
+  }));
+
+  windows.customScriptWindow.once("ready-to-show", () => {
+      windows.customScriptWindow.show();
+  });
+
+  const p = Path.join(__dirname, "docs", "protocol-guide","index.html");
+  windows.customScriptWindow.loadFile(
+    p,
+  );
 }
