@@ -38,6 +38,22 @@ ProfileHeader {
           padding: 3px
         }
       }
+      -fixedIp {
+        display: flex
+        flex-direction: row
+        align-items: center
+        input {
+          text-overflow: ellipsis
+          overflow: hidden
+          margin: 2px 0
+          font-size: 120%
+          padding: 3px
+          flex: 1 1 auto
+        }
+        label {
+          width: 60px
+        }
+      }
       -distanceWarning {
         $distanceWarning
       }

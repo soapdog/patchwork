@@ -422,5 +422,10 @@
 	"Troubleshooting Tools": "Troubleshooting Tools",
 	"Open in Audio Player": "Open in Audio Player",
 	"Custom Scripts": "Custom Scripts",
-	"Search": "Search"
+	"Search": "Search",
+	"Extra": "Extra",
+	"Fixed IP for this profile": "Fixed IP for this profile",
+	"Click for extra actions such as adding a fixed IP to this profile": "Click for extra actions such as adding a fixed IP to this profile",
+	"Add Fixed IP": "Add Fixed IP",
+	"Peers": "Peers"
 }
