@@ -115,6 +115,37 @@ electron.app.on("ready", () => {
           type: "separator",
         },
         {
+          label: "Public",
+          accelerator: "CmdOrCtrl+1",
+          click: () => {
+            browserWindow.webContents.send("navigate-to", "/public");
+          },
+        },
+        {
+          label: "Mentions",
+          accelerator: "CmdOrCtrl+2",
+          click: () => {
+            browserWindow.webContents.send("navigate-to", "/mentions");
+          },
+        },
+        {
+          label: "Private",
+          accelerator: "CmdOrCtrl+3",
+          click: () => {
+            browserWindow.webContents.send("navigate-to", "/private");
+          },
+        },
+        {
+          label: "Participating",
+          accelerator: "CmdOrCtrl+4",
+          click: () => {
+            browserWindow.webContents.send("navigate-to", "/particiapting");
+          },
+        },
+        {
+          type: "separator",
+        },
+        {
           label: "Settings",
           accelerator: "CmdOrCtrl+,",
           click: () => {
