@@ -200,7 +200,7 @@ electron.app.on("ready", () => {
       {
         label: "Protocol Guide",
         click() {
-          openProtocolGuideWindow()
+          openProtocolGuideWindow();
         },
       },
     ];
@@ -258,7 +258,7 @@ electron.app.on("ready", () => {
   });
   electron.ipcMain.handle("consoleLog", (ev, ...o) => {
     for (const i of o) {
-      console.log(i)
+      console.log(i);
     }
   });
   electron.ipcMain.handle("consoleError", (ev, ...o) => console.error(...o));
@@ -474,6 +474,26 @@ function setupContext(appName, opts, cb) {
     //   windows.background.hide()
     // })
     windows.background.setIcon(appIcon);
+
+    electron.ipcMain.on("search", (ev, terms) => {
+      windows.background.webContents.send("search", terms);
+    });
+
+     electron.ipcMain.on("is-search-available", (ev, terms) => {
+      windows.background.webContents.send("is-search-available", terms);
+    });
+
+    electron.ipcMain.on("search-results", (ev, results) => {
+      windows.main.webContents.send("search-results", results);
+    });
+
+    electron.ipcMain.on("search-unavailable", (ev) => {
+      windows.main.webContents.send("search-unavailable");
+    });
+
+    electron.ipcMain.on("search-available", (ev) => {
+      windows.main.webContents.send("search-available");
+    });
   }
 }
 
@@ -594,10 +614,10 @@ function openProtocolGuideWindow() {
   }));
 
   windows.customScriptWindow.once("ready-to-show", () => {
-      windows.customScriptWindow.show();
+    windows.customScriptWindow.show();
   });
 
-  const p = Path.join(__dirname, "docs", "protocol-guide","index.html");
+  const p = Path.join(__dirname, "docs", "protocol-guide", "index.html");
   windows.customScriptWindow.loadFile(
     p,
   );

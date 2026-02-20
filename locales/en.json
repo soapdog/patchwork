@@ -428,5 +428,6 @@
 	"Click for extra actions such as adding a fixed IP to this profile": "Click for extra actions such as adding a fixed IP to this profile",
 	"Add Fixed IP": "Add Fixed IP",
 	"Peers": "Peers",
-	"Hide Fixed IP Field": "Hide Fixed IP Field"
+	"Hide Fixed IP Field": "Hide Fixed IP Field",
+	"Loading search data...": "Loading search data..."
 }
