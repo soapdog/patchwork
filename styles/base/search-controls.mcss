@@ -1,0 +1,17 @@
+SearchControls {
+	display: flex
+	flex-direction: row
+	align-items: center
+
+	div.-spacer {
+		flex: 1 1 auto
+	}
+
+	div {
+		padding-left: 10px
+	}
+
+	div.-active {
+		disabled: true
+	}
+}
