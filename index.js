@@ -326,7 +326,7 @@ function buildMenu(items, window) {
         });
         break;
       default:
-        throw Error(
+        console.log(
           `Unknown menu item of type "${item.type}": ${
             JSON.stringify(item, null, 2)
           }`,
