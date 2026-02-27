@@ -37,7 +37,7 @@ returns true
 The action function is called if the user press the button.
 ]]
 
-function wbMusic.buttonAction(msg)
+function wbMusic.button(msg)
 	if msg == nil then 
 		return false, "no message"
 	end
@@ -56,7 +56,7 @@ function wbMusic.buttonAction(msg)
 	end
 end
 
-function wbMusic.action(msg)
+function wbMusic.buttonAction(msg)
 	local text =  msg.value.content.text
 	local url = extractWormBlossomURL(text)
 
@@ -66,9 +66,10 @@ function wbMusic.action(msg)
 			local iframe = querySelect(content, "iframe")
 			local src = getAttribute(iframe, "src")
 			local song = getParam(src, "song")
-			log(song)
-			openWindowFromAssets("worm-blossom-player/player.html", {
-				data = song
+			openWindowFromAssets("worm-blossom-music/start.js", {
+				data = song,
+				width = 400,
+				height = 300
 			})
 		end
 	end)
@@ -84,23 +85,14 @@ function wbMusic.menuAction()
 end
 
 function wbMusic.menu()
-	local opts = {
-		query ={{	
-			["$filter"] = {
-				value = {
-					content = {
-						channel = "worm-blossom",
-						type = "post"
-					}
-				}
-			},
-			["$sort"] = {{"value","timestamp"}}
-		}},
-		limit = 100,
-		reverse = true
-	}
-	local music = queryAndDrain(opts)
 	
+	local rootsData = query(opts)
+	local roots = filter(rootsData, filterFunc)
+	
+	local latestData = query(opts2)
+	local latest = filter(latestData, filterFunc)
+	
+	return rollup(roots, latest)
 end
 
 
