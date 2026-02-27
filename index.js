@@ -18,8 +18,12 @@ const extend = require("xtend");
 const ssbKeys = require("ssb-keys");
 const announcements = require("./lib/announcements.js");
 const customScripts = require("./lib/depject/scripts/lua/custom-scripts.js");
+const { isFeatureEnabled, enableFeature, disableFeature } = require("./lib/features.js");
 
 require("@electron/remote/main").initialize();
+
+// FEATURES
+disableFeature("custom-scripts")
 
 const windows = {
   dialogs: new Set(),
@@ -281,14 +285,16 @@ electron.app.on("ready", () => {
     }
   });
 
-  electron.ipcMain.on("open-custom-script-window", (ev, data) => {
-    console.log("open-custom-script-window", data);
-    if (!windows?.customScriptWindow) {
-      openCustomScriptWindow(data);
-    } else {
-      windows.audioPlayer.webContents.send("send-data", data);
-    }
-  });
+  if (isFeatureEnabled("custom-scripts")) {
+    electron.ipcMain.on("open-custom-script-window", (ev, data) => {
+      console.log("open-custom-script-window", data);
+      if (!windows?.customScriptWindow) {
+        openCustomScriptWindow(data);
+      } else {
+        windows.audioPlayer.webContents.send("send-data", data);
+      }
+    });
+  }
 
   // announcements
   announcements.copy();
@@ -297,7 +303,9 @@ electron.app.on("ready", () => {
   }
 
   // custom scripts
-  customScripts.copySamples();
+  if (isFeatureEnabled("custom-scripts")) {
+    customScripts.copySamples();
+  }
 });
 
 function openServerDevTools() {
@@ -479,7 +487,7 @@ function setupContext(appName, opts, cb) {
       windows.background.webContents.send("search", terms);
     });
 
-     electron.ipcMain.on("is-search-available", (ev, terms) => {
+    electron.ipcMain.on("is-search-available", (ev, terms) => {
       windows.background.webContents.send("is-search-available", terms);
     });
 
