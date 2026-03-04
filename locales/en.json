@@ -429,5 +429,7 @@
 	"Add Fixed IP": "Add Fixed IP",
 	"Peers": "Peers",
 	"Hide Fixed IP Field": "Hide Fixed IP Field",
-	"Loading search data...": "Loading search data..."
+	"Loading search data...": "Loading search data...",
+	"Storage Manager": "Storage Manager",
+	"Refresh": "Refresh"
 }
