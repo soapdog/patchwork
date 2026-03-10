@@ -4,6 +4,10 @@ Poncho Wonky is a new release of Patchwork. While v3.18.1 was supposed to be the
 
 So, I decided to resume working on Patchwork on my own. I am worse developer than all the other clever hands that touched this code, but I can still get things working, hence here we are.
 
+# AI Policy
+
+I am against LLMs and generative AI, I find them unethical and won't accept contributions made using such tools. Poncho Wonky bugs are organic and human made. 
+
 ## Version History for Poncho Wonky:
 
 ### v4.1.0
