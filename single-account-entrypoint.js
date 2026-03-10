@@ -10,7 +10,7 @@ const extend = require("xtend");
 const ssbKeys = require("ssb-keys");
 const announcements = require("./lib/announcements.js");
 const customScripts = require("./lib/depject/scripts/lua/custom-scripts.js");
-const { isFeatureEnabled, enableFeature, disableFeature } = require(
+const { isFeatureEnabled } = require(
   "./lib/features.js",
 );
 const { quitIfAlreadyRunning } = require("./lib/app-lifecycle.js");

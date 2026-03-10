@@ -6,9 +6,7 @@ process.on("uncaughtException", function (err) {
 
 process.noAsar = true;
 
-const electron = require("electron");
 const { isFeatureEnabled, enableFeature, disableFeature } = require("./lib/features.js");
-const { quitIfAlreadyRunning } = require("./lib/app-lifecycle.js");
 
 require("@electron/remote/main").initialize();
 
