@@ -577,7 +577,7 @@ function openProtocolGuideWindow() {
   let display = electron.screen.getPrimaryDisplay();
   let width = display.bounds.width;
   let height = display.bounds.height;
-  windows.customScriptWindow = new electron.BrowserWindow(extend({
+  windows.protocolGuide = new electron.BrowserWindow(extend({
     show: false,
     resizable: true,
     devTools: true,
@@ -590,12 +590,12 @@ function openProtocolGuideWindow() {
     },
   }));
 
-  windows.customScriptWindow.once("ready-to-show", () => {
-    windows.customScriptWindow.show();
+  windows.protocolGuide.once("ready-to-show", () => {
+    windows.protocolGuide.show();
   });
 
   const p = Path.join(__dirname, "docs", "protocol-guide", "index.html");
-  windows.customScriptWindow.loadFile(
+  windows.protocolGuide.loadFile(
     p,
   );
 }

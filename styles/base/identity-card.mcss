@@ -1,0 +1,22 @@
+IdentityCard {
+	padding: 10px
+	margin: 5px
+	border: solid 1px
+
+	-Key {
+		font-weight: bold
+	}
+	-Path {
+		font-style: italic
+	}
+
+	div.Actions {
+		display: flex
+		flex-direction: row
+		gap: 5px
+
+		div.spacer {
+			flex: 1 1 auto
+		}
+	}
+}
