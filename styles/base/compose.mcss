@@ -48,6 +48,10 @@ Compose {
     border-bottom-right-radius: 5px
     input[type="file"] {
       color: transparent
+      border-style: none;
+      border-width: 0;
+      padding: 0;
+      height: 32px;
       ::-webkit-file-upload-button {
         display: none
       }
