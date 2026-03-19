@@ -2,7 +2,7 @@
   "name": "ssb-patchwork",
   "productName": "Patchwork",
   "repository": "git@github.com:soapdog/patchwork.git",
-  "version": "4.6.1",
+  "version": "4.6.2",
   "description": "A decentralized messaging and sharing app built on top of Secure Scuttlebutt (SSB).",
   "main": "index.js",
   "scripts": {
@@ -115,6 +115,7 @@
     "ssb-tags": "^0.2.0",
     "ssb-unix-socket": "^1.0.0",
     "ssb-uri": "^1.0.1",
+    "ssb-uri2": "^2.4.1",
     "ssb-ws": "^6.2.3",
     "suggest-box": "github:mmckegg/suggest-box#scroll-selection-into-view",
     "text-node-searcher": "^1.1.1",

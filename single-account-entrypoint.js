@@ -14,6 +14,8 @@ const { isFeatureEnabled } = require(
   "./lib/features.js",
 );
 const { quitIfAlreadyRunning } = require("./lib/app-lifecycle.js");
+const dialog = require("electron").dialog;
+const ssbUri = require("ssb-uri2");
 
 quitIfAlreadyRunning();
 const windows = {
@@ -32,6 +34,16 @@ const config = {
 // a flag so we don't start git-ssb-web if a custom path is passed in
 if (process.argv.includes("--path")) {
   config.customPath = true;
+}
+
+if (process.defaultApp) {
+  if (process.argv.length >= 2) {
+    electron.app.setAsDefaultProtocolClient("ssb", process.execPath, [
+      Path.resolve(process.argv[1]),
+    ]);
+  }
+} else {
+  electron.app.setAsDefaultProtocolClient("ssb");
 }
 
 quitIfAlreadyRunning();
@@ -56,6 +68,31 @@ electron.app.on("ready", () => {
         }
       }
     });
+
+    electron.app.on("open-url", (_ev, url) => {
+      if (ssbUri.isClassicMessageSSBURI(url)) {
+        const msgid = ssbUri.toMessageSigil(url);
+        browserWindow.webContents.send("navigate-to", msgid);
+      } else if (ssbUri.isFeedSSBURI(url)) {
+        const feedid = ssbUri.toFeedSigil(url);
+        browserWindow.webContents.send("navigate-to", feedid);
+      }
+    });
+
+    electron.app.on(
+      "second-instance",
+      (_ev, commandLine, _workingDirectory) => {
+        const url = commandLine.pop();
+        // the commandLine is array of strings in which last element is deep link url
+        if (ssbUri.isClassicMessageSSBURI(url)) {
+          const msgid = ssbUri.toMessageSigil(url);
+          browserWindow.webContents.send("navigate-to", msgid);
+        } else if (ssbUri.isFeedSSBURI(url)) {
+          const feedid = ssbUri.toFeedSigil(url);
+          browserWindow.webContents.send("navigate-to", feedid);
+        }
+      },
+    );
 
     const menu = defaultMenu(electron.app, electron.shell);
 
