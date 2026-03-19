@@ -465,7 +465,9 @@ function setupContext(appName, opts, cb) {
     });
 
     electron.ipcMain.on("search-unavailable", (ev) => {
-      windows.main.webContents.send("search-unavailable");
+      if (windows.main) {
+        windows.main.webContents.send("search-unavailable");
+      }
     });
 
     electron.ipcMain.on("search-available", (ev) => {
@@ -485,7 +487,7 @@ function openAnnouncementsWindow() {
       height: 600,
       // titleBarStyle: "hiddenInset",
       autoHideMenuBar: true,
-      title: "Poncho Wonky Announcements",
+      title: "Announcements",
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
