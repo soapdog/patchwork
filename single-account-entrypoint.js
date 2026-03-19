@@ -518,7 +518,7 @@ function openAudioPlayer(msg) {
       y: height - 350,
       // titleBarStyle: "hiddenInset",
       autoHideMenuBar: true,
-      title: "Poncho Wonky Audio Player",
+      title: "Audio Player",
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
