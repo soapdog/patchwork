@@ -6,25 +6,26 @@ process.on("uncaughtException", function (err) {
 
 process.noAsar = true;
 
-const { isFeatureEnabled, enableFeature, disableFeature } = require("./lib/features.js");
-const electron = require("electron")
+const { isFeatureEnabled, enableFeature, disableFeature } = require(
+  "./lib/features.js",
+);
+const electron = require("electron");
 
 require("@electron/remote/main").initialize();
 
 // FEATURES
 disableFeature("custom-scripts");
-if (process.argv.includes("--enable-multiple-accounts")) {
-  enableFeature("multiple-accounts")
+if (process.argv.includes("--enable-multiple-identities")) {
+  enableFeature("multiple-identities");
 } else {
-  disableFeature("multiple-accounts")
-};
+  disableFeature("multiple-identities");
+}
 // END OF FEATURES;
 
-if (isFeatureEnabled("multiple-accounts")) {
-  console.log("===> RUNNING WITH MULTIPLE ACCOUNTS")
-  require("./multi-account-entrypoint.js")
+if (isFeatureEnabled("multiple-identities")) {
+  console.log("===> RUNNING WITH MULTIPLE IDENTITIES");
+  require("./multiple-identities-entrypoint.js");
 } else {
-  console.log("===> RUNNING WITH SINGLE ACCOUNT")
-  require("./single-account-entrypoint.js")
+  console.log("===> RUNNING WITH SINGLE IDENTITY");
+  require("./single-identity-entrypoint.js");
 }
-
