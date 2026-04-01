@@ -38,6 +38,17 @@ ProfileHeader {
           padding: 3px
         }
       }
+      -publicWebHosting {
+        margin-top: 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+
+        Spacer {
+          flex: 1 1 auto;
+        }
+      }
       -fixedIp {
         display: flex
         flex-direction: row
