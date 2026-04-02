@@ -104,6 +104,10 @@ electron.app.on("ready", () => {
     electron.app.quit();
   });
 
+  electron.ipcMain.on("open-identity-manager", (_ev) => {
+    openIdentitiesManager();
+  });
+
   // MARKER: URL HANDLING
   electron.app.on("open-url", (_ev, url) => {
     const browserWindow = windows[windows.keys().next()]?.renderer;
@@ -216,6 +220,12 @@ electron.app.on("ready", () => {
         click: () => {
           const browserWindow = electron.BrowserWindow.getFocusedWindow();
           browserWindow.webContents.send("goToStatus");
+        },
+      },
+      {
+        label: "Identities Manager",
+        click: () => {
+          openIdentitiesManager();
         },
       },
     ],
@@ -364,6 +374,18 @@ electron.app.on("ready", () => {
           result.push({
             ...item,
             click: () => navigateTo(item.target),
+          });
+          break;
+        case "event":
+          item.type = "normal";
+          result.push({
+            ...item,
+            click: () => {
+              switch (item.target) {
+                case "!identities-manager":
+                  openIdentitiesManager();
+              }
+            },
           });
           break;
         default:
