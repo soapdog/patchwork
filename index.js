@@ -6,7 +6,12 @@ process.on("uncaughtException", function (err) {
 
 process.noAsar = true;
 
-const { isFeatureEnabled, enableFeature, disableFeature } = require(
+const {
+  initializeFeatureFile,
+  isFeatureEnabled,
+  enableFeature,
+  disableFeature,
+} = require(
   "./lib/features.js",
 );
 const electron = require("electron");
@@ -14,6 +19,7 @@ const electron = require("electron");
 require("@electron/remote/main").initialize();
 
 // FEATURES
+initializeFeatureFile();
 disableFeature("custom-scripts");
 if (process.argv.includes("--enable-multiple-identities")) {
   enableFeature("multiple-identities");

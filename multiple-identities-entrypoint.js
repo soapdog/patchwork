@@ -46,7 +46,9 @@ electron.app.on("ready", () => {
 == IDENTITY MANAGEMENT ===========================================================================================================
   */
 
-  if (process.argv.includes("--identities-manager")) {
+  if (
+    process.argv.includes("--identities-manager")
+  ) {
     openIdentitiesManager();
   } else {
     const identities = Identities.list();
