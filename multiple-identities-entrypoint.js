@@ -23,6 +23,8 @@ const {
   startServerForIdentity,
   openMainWindowForIdentity,
   openProtocolGuideWindow,
+  openAudioPlayer,
+  openCustomScriptWindow,
 } = require("./lib/app-lifecycle.js");
 const Identities = require("./lib/identities.js");
 
@@ -359,13 +361,17 @@ electron.app.on("ready", () => {
     );
   });
 
-  let audioPlayerWindow = null;
   electron.ipcMain.on("open-in-audio-player", (ev, msg) => {
     console.log("open-in-audio-player");
-    if (!audioPlayerWindow) {
-      openAudioPlayer(msg);
+    const id = ev.sender.keyForWindowsMap;
+    const identityWindows = windows.get(id);
+    if (!identityWindows?.audioPlayer) {
+      identityWindows.audioPlayer = openAudioPlayer(
+        identityWindows.ssbConfig,
+        msg,
+      );
     } else {
-      audioPlayerWindow.webContents.send("queue-audio", msg);
+      identityWindows.audioPlayer.webContents.send("queue-audio", msg);
     }
   });
 
