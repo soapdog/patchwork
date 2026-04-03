@@ -22,6 +22,7 @@ const {
   openIdentitiesManager,
   startServerForIdentity,
   openMainWindowForIdentity,
+  openProtocolGuideWindow,
 } = require("./lib/app-lifecycle.js");
 const Identities = require("./lib/identities.js");
 
@@ -97,6 +98,7 @@ electron.app.on("ready", () => {
   electron.ipcMain.handle("badgeCount", (_ev, count) => {
     electron.app.badgeCount = count;
   });
+
   electron.ipcMain.on("exit", (_ev, code) => process.exit(code));
 
   electron.ipcMain.on("relaunch-app", (_ev) => {
@@ -356,6 +358,38 @@ electron.app.on("ready", () => {
       enabled ? langs : [],
     );
   });
+
+  let audioPlayerWindow = null;
+  electron.ipcMain.on("open-in-audio-player", (ev, msg) => {
+    console.log("open-in-audio-player");
+    if (!audioPlayerWindow) {
+      openAudioPlayer(msg);
+    } else {
+      audioPlayerWindow.webContents.send("queue-audio", msg);
+    }
+  });
+
+  if (isFeatureEnabled("custom-scripts")) {
+    electron.ipcMain.on("open-custom-script-window", (ev, data) => {
+      console.log("open-custom-script-window", data);
+      if (!windows?.customScriptWindow) {
+        openCustomScriptWindow(data);
+      } else {
+        windows.audioPlayer.webContents.send("send-data", data);
+      }
+    });
+  }
+
+  // announcements
+  announcements.copy();
+  if (announcements.available()) {
+    windows.announcement = openAnnouncementsWindow();
+  }
+
+  // custom scripts
+  if (isFeatureEnabled("custom-scripts")) {
+    customScripts.copySamples();
+  }
 
   function buildMenu(items, window) {
     const result = [];
