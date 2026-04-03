@@ -76,7 +76,11 @@ electron.app.on("ready", () => {
 
   electron.ipcMain.handle("consoleLog", (_ev, ...o) => {
     for (const i of o) {
-      console.log(i);
+      if (typeof i === "string") {
+        console.log(i);
+      } else {
+        console.log(JSON.stringify(i));
+      }
     }
   });
 

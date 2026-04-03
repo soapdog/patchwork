@@ -56,4 +56,32 @@ IdentityManager {
 		height: 100vh
 		padding-bottom: 40px
 	}
+
+	form {
+		overflow: auto;
+		margin-top: 60px;
+		padding-bottom: 40px;
+		padding-left: 10px;
+		padding-right: 10px;
+		display: flex
+		flex-direction: column;
+
+		label {
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+
+		input {
+	      border: 1px solid #ccc
+	      font-size: 150%
+	      padding: 10px
+	      flex: 1 1 auto;
+	      background: unset;
+		  color: unset;
+	    }
+
+	    div > button {
+	    	margin-top: 10px;
+	    }
+	}
 }
