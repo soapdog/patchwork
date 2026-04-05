@@ -73,6 +73,7 @@ MainWindow {
     }
     span.nav {
       display: inline-block
+      padding-right: 8px;
       a {
         padding: 4px 10px
         border-radius: 3px
