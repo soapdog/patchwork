@@ -17,6 +17,8 @@ const {
 } = require(
   "./lib/features.js",
 );
+const ssbUri = require("ssb-uri2");
+
 const {
   quitIfAlreadyRunning,
   openIdentitiesManager,
@@ -155,7 +157,8 @@ electron.app.on("ready", () => {
 
   // MARKER: URL HANDLING
   electron.app.on("open-url", (_ev, url) => {
-    const browserWindow = windows[windows.keys().next()]?.renderer;
+    const id = windows.keys().next().value;
+    const browserWindow = windows.get(id)?.renderer;
     console.log("browser window for open url", browserWindow);
     if (ssbUri.isClassicMessageSSBURI(url)) {
       const msgid = ssbUri.toMessageSigil(url);
