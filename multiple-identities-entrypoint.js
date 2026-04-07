@@ -63,7 +63,6 @@ electron.app.on("ready", () => {
         startServerForIdentity(identity).then((o) => {
           windows.set(identity.keys.id, o);
           // console.log("windows fom open identity", windows);
-          console.log(JSON.stringify(o));
           if (o.background === null && o?.remoteIdentity) {
             console.log("Remote identity, opening main window");
             const identityWindows = windows.get(config.keys.id);
