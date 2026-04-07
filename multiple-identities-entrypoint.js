@@ -63,6 +63,22 @@ electron.app.on("ready", () => {
         startServerForIdentity(identity).then((o) => {
           windows.set(identity.keys.id, o);
           // console.log("windows fom open identity", windows);
+          console.log(JSON.stringify(o));
+          if (o.background === null && o?.remoteIdentity) {
+            console.log("Remote identity, opening main window");
+            const identityWindows = windows.get(config.keys.id);
+
+            if (identityWindows) {
+              const renderer = openMainWindowForIdentity(config);
+              identityWindows.renderer = renderer;
+              windows.set(config.keys.id, identityWindows);
+              // console.log("windows from open main", windows);
+              renderer.on("closed", () => {
+                delete identityWindows.renderer;
+                stopRunningIdentity(config.keys.id);
+              });
+            }
+          }
         });
       }
     }
@@ -88,6 +104,22 @@ electron.app.on("ready", () => {
     startServerForIdentity(identity).then((o) => {
       windows.set(identity.keys.id, o);
       // console.log("windows fom open identity", windows);
+      console.log(JSON.stringify(o, null, 2));
+      if (o.background === null && o?.remoteIdentity) {
+        console.log("Remote identity, opening main window");
+        const identityWindows = windows.get(o.ssbConfig.keys.id);
+
+        if (identityWindows) {
+          const renderer = openMainWindowForIdentity(o.ssbConfig);
+          identityWindows.renderer = renderer;
+          windows.set(o.ssbConfig.keys.id, identityWindows);
+          // console.log("windows from open main", windows);
+          renderer.on("closed", () => {
+            delete identityWindows.renderer;
+            stopRunningIdentity(o.ssbConfig.keys.id);
+          });
+        }
+      }
     });
   });
 
@@ -350,7 +382,9 @@ electron.app.on("ready", () => {
 
   electron.ipcMain.on("is-search-available", (ev, terms) => {
     const background = windows.get(ev.sender.keyForWindowsMap).background;
-    background.webContents.send("is-search-available", terms);
+    if (background) {
+      background.webContents.send("is-search-available", terms);
+    }
   });
 
   electron.ipcMain.on("search-results", (ev, results) => {
