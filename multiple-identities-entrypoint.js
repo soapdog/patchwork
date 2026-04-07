@@ -99,6 +99,10 @@ electron.app.on("ready", () => {
       identityWindows.renderer = renderer;
       windows.set(config.keys.id, identityWindows);
       // console.log("windows from open main", windows);
+      renderer.on("closed", () => {
+        delete identityWindows.renderer;
+        stopRunningIdentity(config.keys.id);
+      });
     }
   });
 
@@ -162,6 +166,10 @@ electron.app.on("ready", () => {
   });
 
   electron.ipcMain.on("stop-identity", (ev, id) => {
+    stopRunningIdentity(id);
+  });
+
+  const stopRunningIdentity = (id) => {
     console.log(`stopping ${id}`);
     const windowsForIdentity = windows.get(id);
 
@@ -180,7 +188,7 @@ electron.app.on("ready", () => {
     if (windowsForIdentity?.background) {
       windowsForIdentity.background.close();
     }
-  });
+  };
 
   /*
 == MENU STUFF ===========================================================================================================
