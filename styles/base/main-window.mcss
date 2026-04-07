@@ -125,7 +125,7 @@ MainWindow {
       -webkit-app-region: drag
       position: relative
       span.title {
-        visibility: hidden
+        visibility: visible
       }
       div.info {
         display: block
