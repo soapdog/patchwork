@@ -148,7 +148,44 @@ electron.app.on("ready", () => {
     },
   );
 
-  // MARKER: MENU STUFF
+  electron.ipcMain.handle("get-running-identities", async (_ev) => {
+    const allWebContents = electron.webContents.getAllWebContents();
+    const identities = allWebContents
+      .filter((w) => {
+        return w?.typeOfWindow === "main";
+      })
+      .map((w) => {
+        return w?.keyForWindowsMap;
+      });
+
+    return identities;
+  });
+
+  electron.ipcMain.on("stop-identity", (ev, id) => {
+    console.log(`stopping ${id}`);
+    const windowsForIdentity = windows.get(id);
+
+    if (windowsForIdentity?.renderer) {
+      windowsForIdentity.renderer.close();
+    }
+
+    if (windowsForIdentity?.audioPlayer) {
+      windowsForIdentity.audioPlayer.close();
+    }
+
+    if (windowsForIdentity?.customScriptWindow) {
+      windowsForIdentity.customScriptWindow.close();
+    }
+
+    if (windowsForIdentity?.background) {
+      windowsForIdentity.background.close();
+    }
+  });
+
+  /*
+== MENU STUFF ===========================================================================================================
+  */
+
   const menu = defaultMenu(electron.app, electron.shell);
 
   menu.splice(4, 0, {
@@ -384,10 +421,12 @@ electron.app.on("ready", () => {
   if (isFeatureEnabled("custom-scripts")) {
     electron.ipcMain.on("open-custom-script-window", (ev, data) => {
       console.log("open-custom-script-window", data);
-      if (!windows?.customScriptWindow) {
-        openCustomScriptWindow(data);
+      const id = ev.sender.keyForWindowsMap;
+      const identityWindows = windows.get(id);
+      if (!identityWindows?.customScriptWindow) {
+        identityWindows.customScriptWindow = openCustomScriptWindow(data);
       } else {
-        windows.audioPlayer.webContents.send("send-data", data);
+        windows.customScriptWindow.webContents.send("send-data", data);
       }
     });
   }

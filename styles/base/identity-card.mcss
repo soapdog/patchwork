@@ -18,5 +18,10 @@ IdentityCard {
 		div.spacer {
 			flex: 1 1 auto
 		}
+
+		button.-stop {
+	    	background-color: rgb(178, 77, 122);
+	    	color: whitesmoke;
+	    }
 	}
 }
