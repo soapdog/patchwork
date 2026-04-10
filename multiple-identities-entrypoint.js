@@ -27,6 +27,7 @@ const {
   openProtocolGuideWindow,
   openAudioPlayer,
   openCustomScriptWindow,
+  openAnnouncementsWindow,
 } = require("./lib/app-lifecycle.js");
 const Identities = require("./lib/identities.js");
 
@@ -464,21 +465,20 @@ electron.app.on("ready", () => {
 
   if (isFeatureEnabled("custom-scripts")) {
     electron.ipcMain.on("open-custom-script-window", (ev, data) => {
-      console.log("open-custom-script-window", data);
+      // console.log("open-custom-script-window", data);
       const id = ev.sender.keyForWindowsMap;
       const identityWindows = windows.get(id);
-      if (!identityWindows?.customScriptWindow) {
-        identityWindows.customScriptWindow = openCustomScriptWindow(data);
-      } else {
-        windows.customScriptWindow.webContents.send("send-data", data);
-      }
+      const win = openCustomScriptWindow(
+        identityWindows.ssbConfig,
+        data,
+      );
     });
   }
 
   // announcements
   announcements.copy();
   if (announcements.available()) {
-    windows.announcement = openAnnouncementsWindow();
+    openAnnouncementsWindow();
   }
 
   // custom scripts
@@ -502,7 +502,13 @@ electron.app.on("ready", () => {
         case "normal":
           result.push({
             ...item,
-            click: () => navigateTo(item.target),
+            click: () => {
+              if (item.target) {
+                navigateTo(item.target);
+              } else if (item.click) {
+                item.click();
+              }
+            },
           });
           break;
         case "event":
