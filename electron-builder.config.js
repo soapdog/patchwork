@@ -3,37 +3,37 @@
 //
 // SPDX-License-Identifier: CC0-1.0
 
-const path = require('path');
-const rimraf = require('rimraf');
-const packageJSON = require('./package.json');
+const path = require("path");
+const rimraf = require("rimraf");
+const packageJSON = require("./package.json");
 
 const copyrightYear = new Date().getFullYear();
-const AUTHOR = 'The Scuttlebutt Consortium';
-const NAME_HUMAN = 'Patchwork';
-const NAME_COMPUTER = 'Patchwork';
+const AUTHOR = "The Scuttlebutt Consortium";
+const NAME_HUMAN = "Poncho Wonky";
+const NAME_COMPUTER = "ponchowonky";
 
 module.exports = {
   // Metadata ------------------------------------------------------------------
-  appId: 'org.ssbc.patchwork',
+  appId: "org.ssbc.ponchowonky",
   productName: NAME_HUMAN,
   copyright: `${copyrightYear} ${AUTHOR}`,
   buildVersion: packageJSON.version,
   extraMetadata: {
     name: NAME_COMPUTER,
     version: packageJSON.version,
-    description: 'A social network for the rest of us',
+    description: "A social network for the rest of us",
     author: AUTHOR,
-    homepage: 'https://scuttlebutt.nz',
-    license: 'AGPL-3.0',
-    repository: 'https://github.com/soapdog/patchwork/',
+    homepage: "https://scuttlebutt.nz",
+    license: "AGPL-3.0",
+    repository: "https://github.com/soapdog/patchwork/",
   },
-  protocols: [{name: 'ssb', schemes: ['ssb']}],
+  protocols: [{ name: "ssb", schemes: ["ssb"] }],
 
   // Files section
   files: [
-    '!*.p12',
-    '!*.sh',
-    '!*.lua'
+    "!*.p12",
+    "!*.sh",
+    "!*.lua",
   ],
 
   // Electron-builder options --------------------------------------------------
@@ -44,31 +44,30 @@ module.exports = {
   // All things files and directories ------------------------------------------
   directories: {
     app: __dirname,
-    buildResources: path.join(__dirname, 'build'),
-    output: path.join(__dirname, 'dist'),
+    buildResources: path.join(__dirname, "build"),
+    output: path.join(__dirname, "dist"),
   },
 
   // Linux-specific configurations ---------------------------------------------
   linux: {
-    icon: path.join(__dirname, 'build', '512x512.png'),
+    icon: path.join(__dirname, "build", "512x512.png"),
     target: [
-      {target: 'deb', arch: ['x64', 'arm64']},
-      {target: 'tar.gz', arch: ['x64', 'arm64']},
-      {target: 'AppImage', arch: ['x64', 'arm64']},
+      { target: "deb", arch: ["x64", "arm64"] },
+      { target: "tar.gz", arch: ["x64", "arm64"] },
+      { target: "AppImage", arch: ["x64", "arm64"] },
     ],
-    category: 'Network',
+    category: "Network",
     maintainer: "André Alves Garzia <andre@andregarzia.com>",
   },
 
   deb: {
-    packageCategory: 'net',
-    priority: 'optional',
+    packageCategory: "net",
+    priority: "optional",
     depends: [
-      'libnotify4',
-      'libxtst6',
-      'libnss3',
-      'libc6 >= 2.28',
-
+      "libnotify4",
+      "libxtst6",
+      "libnss3",
+      "libc6 >= 2.28",
       // Disabled to support KDE:
       // 'gconf2',
       // 'gconf-service',
@@ -79,43 +78,41 @@ module.exports = {
   },
 
   appImage: {
-    artifactName: '${name}-${version}-linux-${arch}.${ext}',
+    artifactName: "${name}-${version}-linux-${arch}.${ext}",
   },
 
   // Mac-specific configurations -----------------------------------------------
   mac: {
-    icon: path.join(__dirname, 'build', '512x512.png'),
-    category: 'public.app-category.social-networking',
+    icon: path.join(__dirname, "build", "512x512.png"),
+    category: "public.app-category.social-networking",
     darkModeSupport: true,
-    target: [{target: 'dmg', arch: 'x64'},{target: 'dmg', arch: 'arm64'}],
+    target: [{ target: "dmg", arch: "x64" }, { target: "dmg", arch: "arm64" }],
     hardenedRuntime: true,
-    type: 'distribution',
+    type: "distribution",
     entitlements: "build/entitlements.mac.plist",
     entitlementsInherit: "build/entitlements.mac.plist",
-    x64ArchFiles: '**/*.node'
+    x64ArchFiles: "**/*.node",
   },
 
   dmg: {
-    icon: path.join(__dirname, 'build', '512x512.png'),
+    icon: path.join(__dirname, "build", "512x512.png"),
     // background: path.join(__dirname, 'build', 'dmg-background.png'),
   },
 
   // Windows-specific configurations -------------------------------------------
 
-
   nsis: {
-    artifactName: '${name}-${version}-windows-${arch}-nsis-installer.${ext}',
+    artifactName: "${name}-${version}-windows-${arch}-nsis-installer.${ext}",
     oneClick: false,
     perMachine: false,
   },
 
-
   // Publish options -----------------------------------------------------------
   publish: {
-    provider: 'github',
-    protocol: 'https',
-    owner: 'soapdog',
-    repo: 'patchwork',
-    releaseType: 'release',
+    provider: "github",
+    protocol: "https",
+    owner: "soapdog",
+    repo: "patchwork",
+    releaseType: "release",
   },
 };

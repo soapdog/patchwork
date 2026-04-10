@@ -20,12 +20,26 @@ require("@electron/remote/main").initialize();
 
 // FEATURES
 initializeFeatureFile();
+
 disableFeature("custom-scripts");
+enableFeature("multiple-identities");
+
 if (process.argv.includes("--enable-multiple-identities")) {
   enableFeature("multiple-identities");
-} else {
+} else if (process.argv.includes("--disable-multiple-identities")) {
   disableFeature("multiple-identities");
 }
+
+if (process.argv.includes("--enable-single-identity")) {
+  disableFeature("multiple-identities");
+}
+
+if (process.argv.includes("--disable-custom-scripts")) {
+  disableFeature("custom-scripts");
+} else if (process.argv.includes("--enable-custom-scripts")) {
+  enableFeature("custom-scripts");
+}
+
 // END OF FEATURES;
 
 if (isFeatureEnabled("multiple-identities")) {
