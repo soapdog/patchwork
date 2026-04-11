@@ -31,6 +31,16 @@ const {
 } = require("./lib/app-lifecycle.js");
 const Identities = require("./lib/identities.js");
 
+if (process.defaultApp) {
+  if (process.argv.length >= 2) {
+    electron.app.setAsDefaultProtocolClient("ssb", process.execPath, [
+      Path.resolve(process.argv[1]),
+    ]);
+  }
+} else {
+  electron.app.setAsDefaultProtocolClient("ssb");
+}
+
 quitIfAlreadyRunning();
 
 const config = {
@@ -54,7 +64,14 @@ electron.app.on("ready", () => {
   ) {
     openIdentitiesManager();
   } else {
-    const identities = Identities.list();
+    let identities = Identities.list();
+
+    if (identities.length === 0) {
+      console.log(`No identities, oops...`)
+      Identities.createDefaultIdentity()
+      console.log(`Default identity created!`)
+      identities = Identities.list();
+    }
 
     for (const identity of identities) {
       const configuration = Identities.configurationForIdentity(
