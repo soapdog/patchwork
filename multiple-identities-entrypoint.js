@@ -67,9 +67,9 @@ electron.app.on("ready", () => {
     let identities = Identities.list();
 
     if (identities.length === 0) {
-      console.log(`No identities, oops...`)
-      Identities.createDefaultIdentity()
-      console.log(`Default identity created!`)
+      console.log(`No identities, oops...`);
+      Identities.createDefaultIdentity();
+      console.log(`Default identity created!`);
       identities = Identities.list();
     }
 
