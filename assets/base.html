@@ -1,60 +1,98 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
-  <body>
-    <script>
-      // redirect console to main process
-      var electron = require('electron')
-      var localLog = console.log
-      var localError = console.error
-      var remoteLog = function (o) {
-        const payload = JSON.parse(JSON.stringify(o, null, 2))
-        electron.ipcRenderer.invoke('consoleLog', `${payload}`)
-      }
-      var remoteError = function (o) {
-        const payload = JSON.parse(JSON.stringify(o, null, 2))
-        electron.ipcRenderer.invoke('consoleError', `${payload}`)
-      }
 
-      console.log = function (...args) {
+<head></head>
+
+<body>
+  <script>
+    // redirect console to main process
+    var electron = require('electron')
+    var path = require("path")
+    var debugMode = process.env?.DEBUGMODE ?? false
+    var localLog = console.log
+    var localError = console.error
+    var remoteLog = function(o) {
+      const payload = JSON.parse(JSON.stringify(o, null, 2))
+      electron.ipcRenderer.invoke('consoleLog', `${payload}`)
+    }
+    var remoteError = function(o) {
+      const payload = JSON.parse(JSON.stringify(o, null, 2))
+      electron.ipcRenderer.invoke('consoleError', `${payload}`)
+    }
+
+    var debugLog = (message) => {
+      if (Array.isArray(message)) {
+        message = message.join(` `)
+      }
+      // const assetsPath = __dirname
+      // const rootPath = path.join(assetsPath, "..")
+      const err = new Error();
+      const stack = err.stack.split('\n')[3];
+      const matchResult = stack.match(/at\s+(.*)\s+\((.*):(\d+):(\d+)\)/);
+      if (!Array.isArray(matchResult)) {
+        localLog(message)
+        return
+      }
+      const fileName = matchResult[2];
+      const lineNumber = matchResult[3];
+
+      localLog(`[${fileName}:${lineNumber}] ${message}`);
+    };
+
+    console.log = function(...args) {
+      if (!debugMode) {
         localLog.apply(console, args)
-        remoteLog(...args)
+      } else {
+        debugLog(args)
+      }
+      remoteLog(...args)
+    }
+
+    console.error = function(...args) {
+      localError.apply(console, args)
+      remoteError(...args)
+    }
+
+    process.exit = function(status) { electron.ipcRenderer.sendSync('exit') }
+    // redirect errors to stderr
+    window.addEventListener('error', function(e) {
+      e.preventDefault()
+      // console.dir(e)
+      console.error(e.error?.stack || 'Uncaught in base ' + JSON.stringify(e.error))
+    })
+
+    electron.ipcRenderer.on("set-debug-mode", (ev, mode) => {
+      console.log(debugMode, mode)
+      debugMode = mode
+    })
+
+    electron.ipcRenderer.once('window-setup', (event, msg) => {
+      const {
+        config,
+        rootPath,
+        data,
+        title,
+        debug,
+      } = msg
+      var rootView = require(rootPath)
+      var h = require('mutant/h')
+
+      if (debug) {
+        debugMode = debug
       }
 
-      console.error = function (...args) {
-        localError.apply(console, args)
-        remoteError(...args)
-      }
+      electron.webFrame.setVisualZoomLevelLimits(1, 1)
 
-      process.exit = function(status) {electron.ipcRenderer.sendSync('exit')}
-      // redirect errors to stderr
-      window.addEventListener('error', function (e) {
-        e.preventDefault()
-        // console.dir(e)
-        console.error(e.error?.stack || 'Uncaught in base ' + JSON.stringify(e.error))
-      })
+      document.documentElement.querySelector('head').appendChild(
+        h('title', title)
+      )
 
-      electron.ipcRenderer.once('window-setup', (event, msg) => {
-        const {
-          config,
-          rootPath,
-          data,
-          title,
-        } = msg
-        var rootView = require(rootPath)
-        var h = require('mutant/h')
+      document.documentElement.replaceChild(h('body', [
+        rootView(config, data)
+      ]), document.body)
+    })
 
-        electron.webFrame.setVisualZoomLevelLimits(1, 1)
+  </script>
+</body>
 
-        document.documentElement.querySelector('head').appendChild(
-          h('title', title)
-        )
-
-        document.documentElement.replaceChild(h('body', [
-          rootView(config, data)
-        ]), document.body)
-      })
-
-    </script>
-  </body>
 </html>

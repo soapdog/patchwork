@@ -221,6 +221,15 @@ electron.app.on("ready", () => {
     stopRunningIdentity(id);
   });
 
+  electron.ipcMain.on("debug-server", (ev, id) => {
+    const windowsForIdentity = windows.get(id);
+    if (windowsForIdentity?.background) {
+      windowsForIdentity.background.setSize(1000, 600);
+      windowsForIdentity.background.openDevTools();
+      windowsForIdentity.background.show();
+    }
+  });
+
   const stopRunningIdentity = (id) => {
     console.log(`stopping ${id}`);
     const windowsForIdentity = windows.get(id);
