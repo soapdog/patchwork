@@ -197,6 +197,11 @@ Message {
           content: "↩ "
         }
       }
+      a.edit {
+        :before {
+          content: "✍️ "
+        }
+      }
       a {
         font-size: 13px
         padding: 6px 10px

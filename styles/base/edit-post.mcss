@@ -1,0 +1,23 @@
+StagedTags {
+  margin: 1rem 0 1rem 1rem
+  display: inline-block
+}
+EditPost {
+  margin: 1rem 
+  display: flex
+  flex-direction: column
+  input.tags {
+    font-size: 1rem
+    padding: .4rem
+  }
+
+  textarea {
+    resize: vertical
+    font-size: 120%
+    background: transparent
+    /*border: none*/
+    padding: 10px
+    height: 200px
+    font-family: inherit
+  }
+}
