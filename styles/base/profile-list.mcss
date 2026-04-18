@@ -1,4 +1,5 @@
 ProfileList {
+  padding-top: 10px
   a.profile {
     display: flex
     padding: 4px
