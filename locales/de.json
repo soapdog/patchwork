@@ -303,5 +303,6 @@
 	"Okay, looks like you're getting it. One last one then:\nIf any of this goes wrong, who can most likely help you?\n* The patchwork devs\n* The manyverse devs\n* Nobody": "Okay, looks like you're getting it. One last one then:\nIf any of this goes wrong, who can most likely help you?\n* The patchwork devs\n* The manyverse devs\n* Nobody",
 	"nobody": "nobody",
 	"Congrats, you made it. Here your mnemonic representation of your secret:": "Congrats, you made it. Here your mnemonic representation of your secret:",
-	"Again: be very careful with it. Keep it secret, and don't use this key on multiple devices, including this one.": "Again: be very careful with it. Keep it secret, and don't use this key on multiple devices, including this one."
+	"Again: be very careful with it. Keep it secret, and don't use this key on multiple devices, including this one.": "Again: be very careful with it. Keep it secret, and don't use this key on multiple devices, including this one.",
+	"Plugins": "Plugins"
 }

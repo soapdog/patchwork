@@ -87,9 +87,11 @@
         h('title', title)
       )
 
-      document.documentElement.replaceChild(h('body', [
-        rootView(config, data)
-      ]), document.body)
+      rootView(config, data).then(view => {
+        document.documentElement.replaceChild(h('body', [
+          view
+        ]), document.body)
+      })
     })
 
   </script>
