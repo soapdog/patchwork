@@ -22,6 +22,7 @@ const ssbUri = require("ssb-uri2");
 const {
   quitIfAlreadyRunning,
   openIdentitiesManager,
+  openEphemeralNetworksManager,
   startServerForIdentity,
   openMainWindowForIdentity,
   openProtocolGuideWindow,
@@ -63,6 +64,10 @@ electron.app.on("ready", () => {
     process.argv.includes("--identities-manager")
   ) {
     openIdentitiesManager();
+  } else if (
+    process.argv.includes("--ephemeral-networks")
+  ) {
+    openEphemeralNetworksManager();
   } else {
     let identities = Identities.list();
 
@@ -545,6 +550,9 @@ electron.app.on("ready", () => {
               switch (item.target) {
                 case "!identities-manager":
                   openIdentitiesManager();
+                  break;
+                case "!ephemeral-networks":
+                  openEphemeralNetworksManager();
               }
             },
           });

@@ -1,0 +1,87 @@
+$color1 {
+	background-color: rgb(178, 77, 122) 
+}
+
+$color2 {
+	background-color: rgb(174, 178, 195)
+}
+
+$color3 {
+	background-color: rgb(113, 139, 165)
+}
+
+$color4 {
+	background-color: rgb(255, 247, 233)
+}
+
+$color5 {
+	background-color: rgb(126, 141, 156)
+}
+
+$color6 {
+	background-color: rgb(159, 164, 170)
+}
+
+$color7 {
+	background-color: rgb(159, 164, 170)
+}
+
+$color8 {
+	background-color: rgb(62, 84, 137)
+}
+
+Spacer {
+	flex: 1 1 auto
+}
+
+EphemeralNetworksManager {
+	header {
+		$color4
+		position: fixed
+		width: 100%
+		display: flex
+		align-items: center
+		gap: 5px
+		padding: 5px
+
+		h1 {
+			font-size: 1.5em
+			flex: 1 1 auto
+		}
+	}
+
+	div.Networks {
+		overflow: auto
+		margin-top: 40px
+		height: 100vh
+		padding-bottom: 40px
+	}
+
+	form {
+		overflow: auto;
+		margin-top: 60px;
+		padding-bottom: 40px;
+		padding-left: 10px;
+		padding-right: 10px;
+		display: flex
+		flex-direction: column;
+
+		label {
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+
+		input {
+	      border: 1px solid #ccc
+	      font-size: 150%
+	      padding: 10px
+	      flex: 1 1 auto;
+	      background: unset;
+		  color: unset;
+	    }
+
+	    div > button {
+	    	margin-top: 10px;
+	    }
+	}
+}
