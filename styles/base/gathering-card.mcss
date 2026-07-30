@@ -42,10 +42,18 @@ GatheringCard {
     }
   }
   div.title {
-    button {
+    button.-editGathering {
       float: right
       ::before {
         content: '✎ '
+      }
+    }
+
+    button.-addToCalendar {
+      float: right
+      margin-right: 5px
+      ::before {
+        content: '📅 '
       }
     }
   }
