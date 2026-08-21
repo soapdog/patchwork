@@ -1,4 +1,5 @@
-PrivateMessageButton {
+InactiveAccountsList {
+  margin-top: 10px
   width: 100%
   :hover {
     color: white
