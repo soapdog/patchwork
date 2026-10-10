@@ -123,7 +123,7 @@
     "text-node-searcher": "^1.1.1",
     "xtend": "^4.0.2",
     "ssb-chess-data-access": "2.1.4",
-    "ssb-chess-mithril": "2.0.7"
+    "ssb-chess-mithril": "2.0.8"
   },
   "devDependencies": {
     "@electron/notarize": "^3.1.2",
