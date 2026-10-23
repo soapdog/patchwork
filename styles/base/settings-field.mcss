@@ -1,0 +1,4 @@
+input.SettingsField {
+	background-color: unset;
+	color: unset;
+}
